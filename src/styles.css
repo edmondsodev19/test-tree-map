@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+}
+
+.input-section {
+  margin-right: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-data-wrapper {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-row-number-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea {
+  width: 300px;
+  height: 300px;
+}
