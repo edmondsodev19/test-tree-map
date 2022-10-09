@@ -1,1 +1,1 @@
-export { default } from "./TreeItem";
+export { default } from './TreeItem'

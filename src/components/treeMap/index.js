@@ -1,1 +1,1 @@
-export { default } from "./TreeMap";
+export { default } from './TreeMap'
