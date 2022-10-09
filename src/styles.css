@@ -191,3 +191,14 @@ body {
 .title {
   color: white;
 }
+
+.input-row-number {
+  display: flex;
+  flex: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .input-row-number {
+    flex-direction: column;
+  }
+}

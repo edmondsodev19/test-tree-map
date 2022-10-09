@@ -32,11 +32,15 @@ const mockData = [
 ]
 
 const App = () => {
+  const [displayData, setDisplayData] = useState(
+    JSON.stringify(mockData, null, 2)
+  )
   const [treeMapData, setTreeMapData] = useState(mockData)
   const [rowNum, setRowNum] = useState(3)
 
   const handleChangeTreeMapData = (e) => {
     const inputValue = e.target.value
+    setDisplayData(inputValue)
     if (!isJsonString(inputValue)) {
       return
     }
@@ -70,6 +74,20 @@ const App = () => {
     setRowNum(rowNumInt)
   }
 
+  const handleClickMinusRowNum = () => {
+    if (rowNum === 1) {
+      return
+    }
+    setRowNum((prev) => prev - 1)
+  }
+
+  const handleClickPlusRowNum = () => {
+    if (rowNum === treeMapData.length) {
+      return
+    }
+    setRowNum((prev) => prev + 1)
+  }
+
   return (
     <div className="container">
       <div className="input-section">
@@ -77,14 +95,22 @@ const App = () => {
           <div className="title">Data</div>
           <textarea
             className="textarea"
-            value={JSON.stringify(treeMapData)}
+            value={displayData}
             onChange={handleChangeTreeMapData}
           ></textarea>
         </div>
 
         <div className="input-row-number-wrapper">
           <div className="title">Row number</div>
-          <input value={rowNum} onChange={handleChangeRowNum} />
+          <div className="input-row-number">
+            <input
+              style={{ flex: 1 }}
+              value={rowNum}
+              onChange={handleChangeRowNum}
+            />
+            <button onClick={handleClickMinusRowNum}>-1</button>
+            <button onClick={handleClickPlusRowNum}>+1</button>
+          </div>
         </div>
       </div>
       <TreeMap data={treeMapData} rowNum={rowNum} />
