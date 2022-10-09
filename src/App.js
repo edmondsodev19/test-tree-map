@@ -31,21 +31,26 @@ const mockData = [
   },
 ]
 
+const MIN_ROW_NUM = 1
+
 const App = () => {
   const [displayData, setDisplayData] = useState(
     JSON.stringify(mockData, null, 2)
   )
   const [treeMapData, setTreeMapData] = useState(mockData)
-  const [rowNum, setRowNum] = useState(3)
+  const [rowNum, setRowNum] = useState(MIN_ROW_NUM)
+  const [showErrorMsg, setShowErrorMsg] = useState(false)
 
   const handleChangeTreeMapData = (e) => {
     const inputValue = e.target.value
     setDisplayData(inputValue)
+    setRowNum(MIN_ROW_NUM)
+    setShowErrorMsg(true)
     if (!isJsonString(inputValue)) {
       return
     }
     const dataArr = JSON.parse(inputValue)
-    if (dataArr.length > 50) {
+    if (dataArr.length === 0 || dataArr.length > 50) {
       return
     }
 
@@ -58,7 +63,7 @@ const App = () => {
         return
       }
     }
-
+    setShowErrorMsg(false)
     setTreeMapData(dataArr)
   }
 
@@ -98,6 +103,7 @@ const App = () => {
             value={displayData}
             onChange={handleChangeTreeMapData}
           ></textarea>
+          <div className="error-msg">{showErrorMsg && 'Invalid Data'}</div>
         </div>
 
         <div className="input-row-number-wrapper">
@@ -113,7 +119,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      <TreeMap data={treeMapData} rowNum={rowNum} />
+      <TreeMap isVisible={!showErrorMsg} data={treeMapData} rowNum={rowNum} />
     </div>
   )
 }

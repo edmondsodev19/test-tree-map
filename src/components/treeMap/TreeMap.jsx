@@ -2,7 +2,16 @@ import React from 'react'
 import TreeItem from './treeItem/'
 import './styles.css'
 
-const TreeMap = ({ data, rowNum }) => {
+const TreeMap = ({ isVisible, data, rowNum }) => {
+  if (!isVisible) {
+    return (
+      <div className="tree-map-section">
+        <div className="tree-map-title">Result</div>
+        <div className="tree-map"></div>
+      </div>
+    )
+  }
+
   const sortMockData = data.sort((a, b) => b.weight - a.weight)
 
   const getRowWeight = (row) => {

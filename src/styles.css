@@ -202,3 +202,8 @@ body {
     flex-direction: column;
   }
 }
+
+.error-msg {
+  padding-top: 4px;
+  color: red;
+}
